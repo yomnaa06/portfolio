@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yomna Dhouib - United Nations Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-main:     #f5f7fa;     
+      --bg-cream:    #ffffff;
+      --accent:      #2c5282;     
+      --accent-light:#4299e1;
+      --title-color: #2d3748;    
+      --text-dark:   #4a5568;
+      --footer-bg:   #edf2f7;
+      --footer-text: #718096;
+      --highlight:   #3182ce;    
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg-main);
+      color:var(--text-dark);
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    .container{max-width:1600px;margin:auto;padding:20px;position:relative;}
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:28px 0;position:relative;z-index:100;
+    }
+    .logo{
+      font-family:'Pacifico',cursive;font-size:2.1rem;color:var(--accent);
+      cursor:pointer;transition:color .3s;
+    }
+    .logo:hover{color:#2d3748;}
+    nav a{color:var(--text-dark);text-decoration:none;font-weight:500;transition:color .3s;}
+    nav a:hover{color:var(--accent);}
+    .email-btn{
+      background:#fff;
+      border:2px solid var(--accent);padding:10px 20px;border-radius:30px;
+      font-size:.9rem;cursor:pointer;display:flex;align-items:center;gap:8px;
+      transition:.3s;font-weight:500;
+    }
+    .email-btn:hover{background:var(--accent);color:#fff;}
+
+    .footer{
+      background:var(--footer-bg);padding:50px 40px;
+      text-align:center;color:var(--footer-text);
+      border-top:1px solid rgba(0,0,0,0.06);
+    }
+    .footer .name{font-family:'Pacifico',cursive;font-size:1.5rem;color:var(--accent);}
+    .footer a:hover{color:var(--title-color);}
+
+    .un-section {
+      padding: 100px 40px 140px;
+      text-align: center;
+    }
+    .un-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    
+    .accomplishments-wrapper {
+      flex: 0 0 100%; 
+      margin-bottom: 60px;
+    }
+    
+    .horizontal-accomplishments {
+      background: #fff;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow-x: auto;
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+    
+    .horizontal-accomplishments::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .horizontal-accomplishments::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    
+    .horizontal-accomplishments::-webkit-scrollbar-thumb {
+      background: var(--accent-light);
+      border-radius: 10px;
+    }
+    
+    .accomplishments-block {
+      flex: 0 0 auto;
+      min-width: 600px;
+    }
+    
+    .accomplishments-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--title-color);
+      margin-bottom: 25px;
+    }
+    
+    .accomplishments-block ul {
+      list-style: none;
+      text-align: left;
+      font-size: 1.25rem;
+      line-height: 1.9;
+    }
+    
+    .accomplishments-block li {
+      margin-bottom: 16px;
+      padding-left: 30px;
+      position: relative;
+    }
+    
+    .accomplishments-block li::before {
+      content: "•";
+      color: var(--highlight);
+      font-size: 1.4rem;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+    
+    .un-logo {
+      width: 220px;
+      height: auto;
+      align-self: center;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+      flex-shrink: 0;
+    }
+
+    .certifications-block {
+      flex: 1;
+      min-width: 500px;
+    }
+    .certifications-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--title-color);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 40px; 
+    }
+    .cert-card {
+      background: #fff;
+      padding: 35px; 
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%; 
+    }
+    .cert-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cert-card img {
+      width: 100%;
+      height: 260px; 
+      object-fit: cover; 
+      border-radius: 12px;
+      margin-bottom: 22px; 
+    }
+    .cert-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--title-color);
+      margin-bottom: 8px; 
+      line-height: 1.3;
+      text-align: center; 
+    }
+    .cert-card p {
+      font-size: 1.1rem; 
+      line-height: 1.6;
+      flex-grow: 1; 
+    }
+
+    @media (max-width: 1100px) {
+      .accomplishments-block {
+        min-width: 500px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .un-content {
+        flex-direction: column;
+        gap: 60px;
+        justify-content: center;
+      }
+      .accomplishments-wrapper {
+        margin-bottom: 40px;
+      }
+      .horizontal-accomplishments {
+        flex-direction: column;
+        gap: 40px;
+        padding: 40px;
+      }
+      .accomplishments-block {
+        min-width: auto;
+        width: 100%;
+      }
+      .un-logo {
+        width: 180px;
+        align-self: center;
+      }
+      .certifications-block {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cert-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      .horizontal-accomplishments {
+        padding: 30px;
+      }
+      .accomplishments-block h3 {
+        font-size: 1.8rem;
+      }
+      .accomplishments-block ul {
+        font-size: 1.1rem;
+      }
+      .cert-card {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo" onclick="location.href='index.html'">yomna dhouib</div>
+    <nav>
+      <ul style="display:flex;gap:32px;list-style:none;">
+        <li><a href="my-story.html">my story</a></li>
+        <li><a href="united nations.html">united nations</a></li>
+        <li><a href="google.html">google</a></li>
+        <li><a href="arts.html">arts</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+    <button class="email-btn" onclick="location.href='mailto:ydhouib06@gmail.com'">
+      <span>MY EMAIL</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </button>
+  </header>
+
+  <section class="un-section">
+    <div style="max-width:960px;margin:0 auto;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:4.2rem;color:var(--title-color);margin-bottom:60px;text-align:center;">
+        United Nations Experience
+      </h2>
+
+      <div class="un-content">
+        <div class="accomplishments-wrapper">
+          <div class="horizontal-accomplishments">
+            <div class="accomplishments-block">
+              <h3>Key Accomplishments as a Young Leader</h3>
+              <ul>
+                <li>Represented Tunisia in the United Nations Youth Delegate Program on global humanitarian issues.</li>
+                <li>Actively debated and contributed to resolutions on sustainable development and human rights.</li>
+                <li>Co-authored policy recommendations for climate action and gender equality initiatives.</li>
+                <li>Collaborated with international youth leaders to advance solutions for vulnerable communities.</li>
+                <li>Advocated for education access and climate justice in developing nations.</li>
+                <li>Built networks with UN officials to support long-term humanitarian impact.</li>
+              </ul>
+            </div>
+            <img src="pics/un_logo.jpg" alt="United Nations Logo" class="un-logo">
+          </div>
+        </div>
+
+        <div class="certifications-block">
+          <h3>Certifications</h3>
+          <div class="cert-grid">
+            <div class="cert-card">
+              <img src="pics/UN Academy Certificate in Sustainable Development Goals.png" alt="Sustainable Development Goals Certification">
+              <h4>Sustainable Development Goals Leadership</h4>
+            </div>
+            <div class="cert-card">
+              <img src="pics/International Human Rights Law.png" alt="Human Rights Certification">
+              <h4>International Human Rights Law</h4>
+            </div>
+            <div class="cert-card">
+              <img src="pics/Youth in Global Diplomacy.png" alt="Youth Diplomacy Certification">
+              <h4>Youth in Global Diplomacy</h4>
+            </div>
+            <div class="cert-card">
+              <img src="pics/Climate Change Policy and Action.png" alt="Climate Policy Certification">
+              <h4>Climate Change Policy and Action</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="name">Yomna Dhouib's Portfolio</div>
+    <a href="mailto:ydhouib06@gmail.com" class="email">ydhouib06@gmail.com</a>
+    <div class="connect">LET'S CONNECT!</div>
+    <div class="social-links" style="display:flex;gap:24px;justify-content:center;margin:16px 0;flex-wrap:wrap;">
+      <a href="https://www.instagram.com/yomnadhouib/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@mamounaa_" target="_blank">TikTok</a>
+      <a href="https://github.com/yomnaa06" target="_blank">GitHub</a>
+      <a href="https://www.facebook.com/yomna.dhouib.2025" target="_blank">Facebook</a>
+    </div>
+    <div class="year">© 2025</div>
+  </footer>
+
+</div>
+
+<script>
+  const certCards = document.querySelectorAll('.cert-card');
+
+  const certObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 400);
+        certObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  certCards.forEach(card => certObserver.observe(card));
+</script>
+</body>
+</html>

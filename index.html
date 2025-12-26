@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yomna Dhouib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-main:     #fdf8f6;     
+      --bg-cream:    #fdf8f0;
+      --accent:      #e8c7d5;     
+      --accent-light:#f0d7e0;
+      --title-color: #d8a7b1;     
+      --glow:        rgba(216,167,177,0.4);
+      --text-dark:   #444;
+      --footer-bg:   #ffe5ec;
+      --footer-text: #6b7280;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg-main);
+      color:var(--text-dark);
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    .container{max-width:1600px;margin:auto;padding:20px;position:relative;}
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:28px 0;position:relative;z-index:100;
+    }
+    .logo{
+      font-family:'Pacifico',cursive;font-size:2.1rem;color:var(--accent);
+      cursor:pointer;transition:color .3s;
+    }
+    .logo:hover{color:#d8a7b1;}
+    nav a{color:var(--text-dark);text-decoration:none;font-weight:500;transition:color .3s;}
+    nav a:hover{color:var(--accent);}
+    .email-btn{
+      background:#fff;
+      border:2px solid var(--accent);padding:10px 20px;border-radius:30px;
+      font-size:.9rem;cursor:pointer;display:flex;align-items:center;gap:8px;
+      transition:.3s;font-weight:500;
+    }
+    .email-btn:hover{background:var(--accent);color:#fff;}
+
+    .hero{
+      position:relative;min-height:100vh;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:var(--bg-main);
+    }
+
+    .main-photo{
+      width:360px;height:360px;border-radius:50%;overflow:hidden;
+      border:22px solid #fff;box-shadow:0 30px 70px rgba(0,0,0,.18);
+      z-index:50;position:relative;
+    }
+    .main-photo img{width:100%;height:100%;object-fit:cover;}
+    .main-photo:hover{transform:scale(1.04);transition:.4s;}
+
+    .name-wrapper{margin-top:32px;text-align:center;z-index:60;}
+    .name-first,.name-last{
+      font-family:'Pacifico',cursive;font-size:4.4rem;
+      color:var(--accent);line-height:1.1;
+      text-shadow:1px 1px 12px rgba(0,0,0,.08);
+    }
+
+    .collage-container{
+      position:absolute;top:0;left:0;width:100%;height:100%;
+      pointer-events:none;z-index:10;
+    }
+    .collage-item{
+      position:absolute;
+      width:110px;height:165px;
+      background:#fff;border-radius:18px;overflow:hidden;
+      box-shadow:0 14px 38px rgba(0,0,0,.24);
+      transition:all .6s cubic-bezier(.2,.8,.4,1);
+      opacity:0;pointer-events:auto;
+    }
+    .collage-item img{width:100%;height:100%;object-fit:cover;}
+    .collage-item.visible{opacity:1;}
+    .collage-item:hover{
+      transform:scale(1.7)!important;
+      box-shadow:0 36px 90px rgba(0,0,0,.5)!important;
+      z-index:100;
+    }
+
+    .collage-item:nth-child(1)  {top:10%;left:24%;}
+    .collage-item:nth-child(2)  {top:10%;right:24%;}
+    .collage-item:nth-child(3)  {top:20%;left:14%;}
+    .collage-item:nth-child(4)  {top:20%;right:14%;}
+    .collage-item:nth-child(5)  {top:34%;left:8%;}
+    .collage-item:nth-child(6)  {top:34%;right:8%;}
+    .collage-item:nth-child(7)  {bottom:34%;left:10%;}
+    .collage-item:nth-child(8)  {bottom:34%;right:10%;}
+    .collage-item:nth-child(9)  {bottom:20%;left:16%;}
+    .collage-item:nth-child(10) {bottom:20%;right:16%;}
+    .collage-item:nth-child(11) {bottom:10%;left:26%;}
+    .collage-item:nth-child(12) {bottom:10%;right:26%;}
+
+    .cards-title{
+      position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+      font-family:'Playfair Display',serif;color:var(--title-color);
+      font-size:5.8rem;opacity:0;z-index:200;white-space:nowrap;
+      text-shadow:0 4px 20px var(--glow);
+      transition:all 1.5s cubic-bezier(0.18, 0, 0.32, 1.28);
+    }
+    .cards-title.visible{top:100px;opacity:1;
+      animation:titleGlow 2.4s ease-out forwards;
+    }
+    @keyframes titleGlow{
+      0%,100%{text-shadow:0 4px 20px var(--glow);}
+      50%{text-shadow:0 10px 50px rgba(216,167,177,0.7);}
+    }
+
+    .sparkles{opacity:0;position:absolute;top:70px;left:50%;transform:translateX(-50%);width:380px;height:140px;z-index:199;}
+    .sparkles.visible{opacity:0.8;}
+    .sparkle{
+      position:absolute;width:7px;height:7px;background:#fff;border-radius:50%;
+      box-shadow:0 0 14px #fff;
+      animation:sparkleFall 1.6s linear forwards;
+    }
+    @keyframes sparkleFall{
+      0%{transform:translateY(-30px) scale(0);opacity:1;}
+      100%{transform:translateY(90px) scale(1);opacity:0;}
+    }
+
+    .cards-section{
+      padding:160px 40px 180px;background:var(--bg-cream);
+      text-align:center;position:relative;overflow:hidden;
+      margin-top:-120px;box-shadow:0 -20px 60px rgba(0,0,0,0.06);
+    }
+    .cards-wrapper{
+      display:flex;justify-content:center;gap:70px;flex-wrap:wrap;
+      perspective:1400px;margin-top:60px;
+    }
+    .card{
+      width:210px;height:300px;background:#fff;border-radius:16px;
+      box-shadow:0 12px 32px rgba(0,0,0,.15);cursor:pointer;
+      opacity:0;transform:translateX(500px) rotateY(35deg);
+      transition:all 1s cubic-bezier(0.23,1,0.32,1);
+    }
+    .card.visible{opacity:1;transform:translateX(0) rotateY(0);}
+    .card:hover{
+      animation:softSwing 1.8s ease-in-out infinite;
+      box-shadow:0 28px 60px rgba(0,0,0,.28);
+      transform:translateY(-16px);
+    }
+    
+  .card .suit{
+    position: absolute;
+    font-size: 2.8rem;
+    font-weight: 800;
+    opacity: 0.85;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -1px;
+  }
+  .card .suit.top   { top: 26px; left: 26px; }
+  .card .suit.bottom{ right: 26px; bottom: 26px; transform: rotate(180deg); }
+
+  .card .value{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Pacifico', cursive;
+    font-size: 1.7rem;
+    color: var(--text-dark);
+    text-align: center;
+    line-height: 1.3;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .card[data-section="about"] .suit     { color: #ffb3c6; }
+  .card[data-section="exhibits"] .suit  { color: #d8b4e2; }
+  .card[data-section="artshop"] .suit   { color: #f8c8dc; }
+  .card[data-section="works"] .suit     { color: #c8d8e4; }
+  .card[data-section="contact"] .suit   { color: #b3e5fc; }
+
+    .pick-text{
+      font-family:'Pacifico',cursive;font-size:1.9rem;color:var(--accent);
+      margin:80px 0 40px;opacity:0;transform:translateY(30px);
+      transition:all 1s .6s;
+    }
+    .pick-text.visible{opacity:1;transform:translateY(0);}
+
+    @keyframes softSwing{
+      0%,100%{transform:rotate(0deg);}
+      25%{transform:rotate(-3deg);}
+      75%{transform:rotate(3deg);}
+    }
+
+    .scroll-swan{
+      position:fixed;bottom:40px;left:60px;display:flex;flex-direction:column;align-items:center;
+      font-family:'Pacifico',cursive;font-size:.95rem;color:#666;z-index:100;
+      transition:all .7s ease;
+    }
+    .scroll-swan.hidden{transform:translateX(-140px) rotate(-25deg);opacity:0;}
+    .scroll-swan img{width:70px;margin-bottom:8px;animation:swanSwing 2s ease-in-out infinite;}
+    @keyframes swanSwing{
+      0%,100%{transform:rotate(0deg);}
+      30%{transform:rotate(-10deg);}
+      70%{transform:rotate(8deg);}
+    }
+
+    .footer{
+      background:var(--footer-bg);padding:50px 40px;
+      text-align:center;color:var(--footer-text);
+      border-top:1px solid rgba(0,0,0,0.06);
+    }
+    .footer .name{font-family:'Pacifico',cursive;font-size:1.5rem;color:var(--accent);}
+    .footer a:hover{color:var(--title-color);}
+
+    @media(max-width:1000px){
+      .cards-title{font-size:4.8rem;}.cards-title.visible{top:90px;}
+      .collage-item{width:90px;height:135px;}
+    }
+    @media(max-width:700px){
+      .cards-title{font-size:4rem;}.cards-title.visible{top:80px;}
+      .main-photo{width:300px;height:300px;}
+      .name-first,.name-last{font-size:3.6rem;}
+      .collage-item{width:75px;height:112px;}
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="scroll-swan" id="scrollSwan">
+    <img src="https://iili.io/2e8Yk2p.png" alt="Swan">
+    <span>scroll down</span>
+  </div>
+
+  <header>
+    <div class="logo" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'});">yomna dhouib</div>
+    <nav>
+      <ul style="display:flex;gap:32px;list-style:none;">
+        <li><a href="my-story.html">my story</a></li>
+        <li><a href="united nations.html">united nations</a></li>
+        <li><a href="google.html">google</a></li>
+        <li><a href="arts.html">arts</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+    <button class="email-btn" onclick="location.href='mailto:ydhouib06@gmail.com'">
+      <span>MY EMAIL</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </button>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="main-photo">
+      <img src="pics/yomna_portfolio.jpg" alt="Yomna Dhouib">
+    </div>
+    <div class="name-wrapper">
+      <div class="name-first">Yomna</div>
+      <div class="name-last">Dhouib</div>
+    </div>
+
+    <div class="collage-container">
+      <div class="collage-item"><img src="pics/1.jpeg" alt="1"></div>
+      <div class="collage-item"><img src="pics/2.jpeg" alt="2"></div>
+      <div class="collage-item"><img src="pics/3.jpeg" alt="3"></div>
+      <div class="collage-item"><img src="pics/4.jpg" alt="4"></div>
+      <div class="collage-item"><img src="pics/5.jpg" alt="5"></div>
+      <div class="collage-item"><img src="pics/6.jpg" alt="6"></div>
+      <div class="collage-item"><img src="pics/7.jpg" alt="7"></div>
+      <div class="collage-item"><img src="pics/8.jpg" alt="8"></div>
+      <div class="collage-item"><img src="pics/9.jpg" alt="9"></div>
+      <div class="collage-item"><img src="pics/10.jpg" alt="10"></div>
+      <div class="collage-item"><img src="pics/11.jpg" alt="11"></div>
+      <div class="collage-item"><img src="pics/12.jpg" alt="12"></div>
+    </div>
+  </section>
+
+  <section class="cards-section" id="cards">
+    <h2 class="cards-title" id="cardsTitle">What’s in the cards for us?</h2>
+    <div class="sparkles" id="sparkles"></div>
+
+    <div class="cards-wrapper">
+      <div class="card" onclick="location.href='my-story.html'">
+        <div class="suit top">A</div><div class="suit bottom">A</div>
+        <div class="value">My<br>Story</div>
+      </div>
+      <div class="card" onclick="location.href='united nations.html'">
+        <div class="suit top">A</div><div class="suit bottom">A</div>
+        <div class="value">United Nations<br>Experience</div>
+      </div>
+      <div class="card" onclick="location.href='arts.html'">
+        <div class="suit top">A</div><div class="suit bottom">A</div>
+        <div class="value">Google<br>Experience</div>
+      </div>
+      <div class="card" onclick="location.href='google.html'">
+        <div class="suit top">A</div><div class="suit bottom">A</div>
+        <div class="value">View<br>works</div>
+      </div>
+      <div class="card" onclick="location.href='contact.html'">
+        <div class="suit top">A</div><div class="suit bottom">A</div>
+        <div class="value">Contact</div>
+      </div>
+    </div>
+    <p class="pick-text" id="pickText">pick a card,<br>any card!</p>
+  </section>
+
+  <footer class="footer">
+    <div class="name">Yomna Dhouib's Portfolio</div>
+    <a href="mailto:ydhouib06@gmail.com" class="email">ydhouib06@gmail.com</a>
+    <div class="connect">LET'S CONNECT!</div>
+    <div class="social-links" style="display:flex;gap:24px;justify-content:center;margin:16px 0;flex-wrap:wrap;">
+      <a href="https://www.instagram.com/yomnadhouib/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@mamounaa_" target="_blank">TikTok</a>
+      <a href="https://github.com/yomnaa06" target="_blank">GitHub</a>
+      <a href="https://www.facebook.com/yomna.dhouib.2025" target="_blank">Facebook</a>
+    </div>
+    <div class="year">© 2025</div>
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.collage-item').forEach((item, i) => {
+      setTimeout(() => item.classList.add('visible'), 100 + i * 70);
+    });
+  });
+
+  const title = document.getElementById('cardsTitle');
+  const sparkles = document.getElementById('sparkles');
+  const cards = document.querySelectorAll('.card');
+  const pickText = document.getElementById('pickText');
+  const cardsSection = document.querySelector('.cards-section');
+
+  function resetAnimation() {
+    title.classList.remove('visible');
+    sparkles.classList.remove('visible');
+    sparkles.innerHTML = '';
+    cards.forEach(c => c.classList.remove('visible'));
+    pickText.classList.remove('visible');
+  }
+
+  function playAnimation() {
+    title.classList.add('visible');
+    sparkles.classList.add('visible');
+    createSparkles();
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.add('visible'), 600 + i * 200);
+    });
+    setTimeout(() => pickText.classList.add('visible'), 1600);
+  }
+
+  function createSparkles() {
+    for (let i = 0; i < 16; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = Math.random() * 360 + 'px';
+      s.style.animationDelay = Math.random() * 0.8 + 's';
+      sparkles.appendChild(s);
+      setTimeout(() => s.remove(), 2400);
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const trigger = cardsSection.offsetTop - window.innerHeight * 0.7;
+    if (scrollY >= trigger) {
+      if (!title.classList.contains('visible')) playAnimation();
+    } else {
+      resetAnimation();
+    }
+  });
+
+  const swan = document.getElementById('scrollSwan');
+  let scrolled = false;
+  window.addEventListener('scroll', () => {
+    if (!scrolled && window.scrollY > 100) {
+      swan.classList.add('hidden');
+      scrolled = true;
+    } else if (scrolled && window.scrollY <= 100) {
+      swan.classList.remove('hidden');
+      scrolled = false;
+    }
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yomna Dhouib - Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&family=EB+Garamond:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-main:     #fbf8f3;     
+      --bg-cream:    #f9f5ef;
+      --accent:      #e8dfd4;    
+      --accent-light:#f1ebe3;
+      --title-color: #a38f7a;     
+      --text-dark:   #7a6b5a;     
+      --footer-bg:   #f5efe8;
+      --footer-text: #8a7b6a;
+      
+      --postcard-bg: #fffefb;
+      --postcard-border: #e8dfd4;
+      --postcard-line: #f1ebe3;
+      --stamp-bg: #f9f5ef;
+    }
+    
+    *{margin:0;padding:0;box-sizing:border-box;}
+    
+    body{
+      font-family:'Cormorant Garamond', serif; 
+      background:var(--bg-main);
+      color:var(--text-dark);
+      overflow-x:hidden;
+      line-height:1.7;
+      font-weight:400;
+      font-size:1.05rem;
+    }
+    
+    .container{max-width:1200px;margin:auto;padding:20px;position:relative;}
+
+    
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 0;
+      position:relative;
+      z-index:100;
+    }
+    
+    .logo{
+      font-family:'Pacifico',cursive;
+      font-size:2.1rem;
+      color:var(--title-color); 
+      cursor:pointer;
+      transition:color .3s;
+      font-weight:400;
+    }
+    
+    .logo:hover{color:#8a7b6a;}
+    
+  
+    nav a{
+      color:var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      transition:color .3s;
+      font-size:1rem;
+      font-family:'Poppins', sans-serif; 
+    }
+    
+    nav a:hover{color:var(--title-color);}
+    nav a.active {
+      color: var(--title-color); 
+      font-weight: 600;
+    }
+    
+    
+    .email-btn{
+      background:transparent;
+      border:1.5px solid var(--title-color); 
+      padding:8px 20px;
+      border-radius:20px;
+      font-size:0.9rem;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      transition:all .3s ease;
+      font-weight:500;
+      color: var(--title-color); 
+      font-family:'Poppins', sans-serif; 
+    }
+    
+    .email-btn:hover{
+      background:var(--title-color); 
+      color:white;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(163, 143, 122, 0.2);
+    }
+
+   
+    .contact-hero {
+      text-align:center;
+      padding:50px 20px 30px;
+    }
+    
+    .contact-title {
+      font-family:'Playfair Display', serif;
+      font-size:3rem;
+      color:var(--title-color); 
+      margin-bottom:12px;
+      font-weight:500;
+      letter-spacing:0.5px;
+    }
+    
+    .contact-subtitle {
+      font-size:1.15rem;
+      color:var(--text-dark);
+      opacity:0.85;
+      max-width:500px;
+      margin:0 auto;
+      font-weight:400;
+      font-style:italic;
+      font-family:'Cormorant Garamond', serif; 
+    }
+
+    .horizontal-wrapper {
+      max-width:850px;
+      margin:30px auto;
+      padding:20px;
+    }
+    
+    .horizontal-postcard {
+      background:var(--postcard-bg);
+      border-radius:6px;
+      box-shadow:0 10px 30px rgba(163, 143, 122, 0.1);
+      border:1px solid var(--postcard-border);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      min-height:360px;
+      margin-bottom:30px;
+    }
+    
+    .postcard-texture {
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background-image:
+        repeating-linear-gradient(to right, 
+          transparent, 
+          transparent 39px, 
+          rgba(232, 223, 212, 0.15) 39px, 
+          rgba(232, 223, 212, 0.15) 40px);
+      pointer-events:none;
+      opacity:0.4;
+    }
+    
+    .stamps-side {
+      width:200px;
+      background:var(--stamp-bg);
+      padding:30px;
+      border-right:1px solid var(--postcard-border);
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+      align-items:center;
+      justify-content:center;
+    }
+    
+    .stamps-title {
+      font-family:'Playfair Display', serif;
+      font-size:1.4rem;
+      color:var(--title-color); 
+      margin-bottom:20px;
+      text-align:center;
+      font-weight:500;
+    }
+    
+    
+    
+    .stamp-option {
+      width:85px;
+      height:105px;
+      border-radius:4px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      border:2px solid white;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    
+    .stamp-option {
+      width:75px;
+      height:95px;
+      border-radius:4px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      border:2px solid white;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    .stamp-option:hover {
+      transform:scale(1.08);
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    }
+    
+    .stamp-option.active {
+      border-color:var(--title-color); 
+      transform:scale(1.05);
+      box-shadow:0 5px 15px rgba(163, 143, 122, 0.2);
+    }
+    
+    .stamp-option img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.3s ease;
+      filter:sepia(0.15) brightness(1.02);
+    }
+    
+    .stamp-option:hover img {
+      transform:scale(1.05);
+    }
+    
+    
+    .form-side {
+      flex:1;
+      padding:35px 30px;
+      position:relative;
+    }
+    
+    .form-stamp-spot {
+      position:absolute;
+      top:25px;
+      right:25px;
+      width:90px;
+      height:110px;
+      border:2px dashed var(--postcard-border);
+      border-radius:4px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,0.6);
+      transition:all 0.3s ease;
+    }
+    
+    .stamp-placeholder {
+      color:var(--text-dark);
+      opacity:0.5;
+      font-size:0.85rem;
+      text-align:center;
+      padding:10px;
+      font-style:italic;
+      font-family:'Cormorant Garamond', serif; 
+    }
+    
+    .form-stamp-spot img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:2px;
+      display:none;
+    }
+    
+    .form-stamp-spot.has-stamp {
+      border-style:solid;
+      border-color:var(--title-color); 
+      background:rgba(255,255,255,0.8);
+    }
+
+    .form-group {
+      margin-bottom:25px;
+      max-width:500px;
+    }
+    
+    .form-label {
+      display:block;
+      margin-bottom:10px;
+      color:var(--title-color); 
+      font-family:'Playfair Display', serif;
+      font-size:1.2rem;
+      font-weight:500;
+      letter-spacing:0.3px;
+    }
+    
+    .form-input,
+    .form-textarea {
+      width:100%;
+      padding:14px 16px;
+      border:1px solid var(--postcard-border);
+      border-radius:3px;
+      font-family:'EB Garamond', serif; 
+      font-size:1.05rem;
+      background:rgba(255,255,255,0.9);
+      transition:all 0.3s ease;
+      color:var(--text-dark);
+      line-height:1.6;
+    }
+    
+    .form-input:focus,
+    .form-textarea:focus {
+      outline:none;
+      border-color:var(--title-color); 
+      background:white;
+      box-shadow:0 0 0 3px rgba(163, 143, 122, 0.1);
+    }
+    
+    .form-textarea {
+      height:110px;
+      resize:vertical;
+      line-height:1.7;
+    }
+    
+   
+    .send-btn {
+      background:var(--title-color); 
+      color:white;
+      border:none;
+      padding:14px 38px;
+      border-radius:3px;
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.1rem;
+      font-weight:500;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      margin-top:20px;
+      box-shadow:0 5px 15px rgba(163, 143, 122, 0.2);
+      letter-spacing:0.5px;
+    }
+    
+    .send-btn:hover {
+      background:#8a7b6a;
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(163, 143, 122, 0.25);
+    }
+    
+    .send-btn:disabled {
+      opacity:0.5;
+      cursor:not-allowed;
+      transform:none;
+      background:#c9beb0;
+    }
+    
+    .success-message {
+      display:none;
+      background:rgba(232, 223, 212, 0.9);
+      border:1px solid var(--title-color); 
+      padding:22px;
+      border-radius:3px;
+      text-align:center;
+      margin-top:25px;
+      color:var(--text-dark);
+      max-width:500px;
+      font-size:1.05rem;
+      font-family:'Cormorant Garamond', serif; 
+    }
+    
+    .success-message.show {
+      display:block;
+      animation:fadeIn 0.5s ease;
+    }
+    
+    .success-message h3 {
+      font-family:'Playfair Display', serif;
+      color:var(--title-color); 
+      margin-bottom:10px;
+      font-weight:500;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(-10px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    .footer{
+      background:var(--footer-bg);
+      padding:40px 30px;
+      text-align:center;
+      color:var(--footer-text);
+      border-top:1px solid rgba(0,0,0,0.06);
+      margin-top:60px;
+      font-family:'Poppins', sans-serif; 
+    }
+    
+    .footer .name{
+      font-family:'Pacifico',cursive;
+      font-size:1.5rem;
+      color:var(--title-color); 
+      margin-bottom:12px;
+      font-weight:400;
+    }
+    
+    .footer a{
+      color:var(--footer-text);
+      text-decoration:none;
+      transition:color 0.3s;
+      font-family:'Poppins', sans-serif; 
+    }
+    
+    .footer a:hover{color:var(--title-color);}
+    
+    .social-links {
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      margin:22px 0;
+      flex-wrap:wrap;
+    }
+    
+    .social-links a {
+      font-size:0.95rem;
+      padding:9px 18px;
+      background:rgba(163, 143, 122, 0.1);
+      border-radius:20px;
+      transition:all 0.3s ease;
+      color:var(--footer-text);
+      text-decoration:none;
+      font-family:'Poppins', sans-serif; 
+    }
+    
+    .social-links a:hover {
+      background:rgba(163, 143, 122, 0.2);
+      color:var(--title-color);
+      transform:translateY(-1px);
+    }
+    
+    .connect {
+      font-weight:500;
+      margin:15px 0 10px;
+      font-family:'Poppins', sans-serif; 
+    }
+    
+    .year {
+      font-size:0.9rem;
+      opacity:0.7;
+      margin-top:10px;
+      font-family:'Poppins', sans-serif; 
+    }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      .horizontal-postcard {
+        flex-direction:column;
+        min-height:auto;
+      }
+      
+      .stamps-side {
+        width:100%;
+        border-right:none;
+        border-bottom:1px solid var(--postcard-border);
+        padding:25px;
+      }
+      
+      .stamp-options {
+        grid-template-columns:repeat(4, 1fr);
+        max-width:350px;
+      }
+      
+      .form-side {
+        padding:30px 25px;
+      }
+      
+      .form-stamp-spot {
+        position:relative;
+        top:0;
+        right:0;
+        margin:0 auto 25px;
+        width:85px;
+        height:105px;
+      }
+      
+      .contact-title {
+        font-size:2.5rem;
+      }
+      
+      header {
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+      }
+      
+      nav ul {
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+        padding:0;
+      }
+    }
+    
+    @media (max-width:480px) {
+      .stamp-options {
+        grid-template-columns:repeat(2, 1fr);
+      }
+      
+      .stamp-option {
+        width:70px;
+        height:90px;
+      }
+      
+      .contact-title {
+        font-size:2.2rem;
+      }
+      
+      .social-links {
+        gap:12px;
+      }
+      
+      .social-links a {
+        padding:7px 14px;
+        font-size:0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo" onclick="location.href='index.html'">yomna dhouib</div>
+    <nav>
+      <ul style="display:flex;gap:25px;list-style:none;padding:0;">
+        <li><a href="my-story.html">my story</a></li>
+        <li><a href="united nations.html">united nations</a></li>
+        <li><a href="google.html">google</a></li>
+        <li><a href="arts.html">arts</a></li>
+        <li><a href="contact.html" class="active">contact</a></li>
+      </ul>
+    </nav>
+    <button class="email-btn" onclick="location.href='mailto:ydhouib06@gmail.com'">
+      <span>EMAIL</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </button>
+  </header>
+
+  <section class="contact-hero">
+    <h1 class="contact-title">Send a Postcard</h1>
+    <p class="contact-subtitle">Choose a stamp and write your message</p>
+  </section>
+
+ 
+  <div class="horizontal-wrapper">
+    <div class="horizontal-postcard">
+      <div class="postcard-texture"></div>
+      
+      <div class="stamps-side">
+        <h3 class="stamps-title">Choose Stamp</h3>
+        <div class="stamp-options">
+          <div class="stamp-option" data-stamp="flower" onclick="selectStamp(this, 'pics/stamp1.png')">
+            <img src="pics/stamp1.png" alt="Floral Stamp">
+          </div>
+          
+          <div class="stamp-option" data-stamp="travel" onclick="selectStamp(this, 'pics/stamp2.png')">
+            <img src="pics/stamp2.png" alt="Travel Stamp">
+          </div>
+          
+          <div class="stamp-option" data-stamp="nature" onclick="selectStamp(this, 'pics/stamp3.png')">
+            <img src="pics/stamp3.png" alt="Nature Stamp">
+          </div>
+          
+          <div class="stamp-option" data-stamp="heart" onclick="selectStamp(this, 'pics/stamp4.png')">
+            <img src="pics/stamp4.png" alt="Heart Stamp">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-side">
+        <div class="form-stamp-spot" id="stampSpot">
+          <div class="stamp-placeholder">Select a stamp</div>
+          <img id="selectedStampImg" alt="Selected Stamp">
+        </div>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" placeholder="Your name..." required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Your Email</label>
+            <input type="email" class="form-input" placeholder="your.email@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-textarea" placeholder="Write your message here..." required></textarea>
+          </div>
+          
+          <input type="hidden" id="selectedStamp" value="">
+          
+          <button type="submit" class="send-btn" id="sendBtn" disabled>
+            Send Postcard
+          </button>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+          <h3>Postcard Sent!</h3>
+          <p>Thank you for your message! I'll get back to you soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="name">Yomna Dhouib</div>
+    <a href="mailto:ydhouib06@gmail.com" class="email">ydhouib06@gmail.com</a>
+    <div class="connect">LET'S CONNECT!</div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/yomnadhouib/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@mamounaa_" target="_blank">TikTok</a>
+      <a href="https://github.com/yomnaa06" target="_blank">GitHub</a>
+      <a href="https://www.facebook.com/yomna.dhouib.2025" target="_blank">Facebook</a>
+    </div>
+    <div class="year">© 2025</div>
+  </footer>
+
+</div>
+
+<script>
+  let selectedStampType = '';
+  let selectedStampImage = '';
+  
+  // Stamp selection
+  function selectStamp(stampElement, imageSrc) {
+    // Remove active class from all stamps
+    document.querySelectorAll('.stamp-option').forEach(stamp => {
+      stamp.classList.remove('active');
+    });
+    
+    // Add active class to clicked stamp
+    stampElement.classList.add('active');
+    
+    // Get stamp data
+    selectedStampType = stampElement.dataset.stamp;
+    selectedStampImage = imageSrc;
+    
+    // Update stamp spot
+    const stampSpot = document.getElementById('stampSpot');
+    const stampImg = document.getElementById('selectedStampImg');
+    const placeholder = stampSpot.querySelector('.stamp-placeholder');
+    
+    placeholder.style.display = 'none';
+    stampImg.src = imageSrc;
+    stampImg.style.display = 'block';
+    stampSpot.classList.add('has-stamp');
+    
+    // Update hidden input
+    document.getElementById('selectedStamp').value = selectedStampType;
+    
+    // Enable send button
+    document.getElementById('sendBtn').disabled = false;
+  }
+  
+  // Form submission
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Check if stamp is selected
+      if (!selectedStampType) {
+        alert('Please select a stamp first!');
+        return;
+      }
+      
+      // Get form data
+      const name = this.querySelector('input[type="text"]').value;
+      const email = this.querySelector('input[type="email"]').value;
+      const message = this.querySelector('textarea').value;
+      
+      // Validation
+      if (!name || !email || !message) {
+        alert('Please fill in all fields!');
+        return;
+      }
+      
+      // Show success message
+      document.getElementById('successMessage').classList.add('show');
+      
+      // Log data
+      console.log('Postcard sent:', { 
+        name, 
+        email, 
+        message, 
+        stamp: selectedStampType 
+      });
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        // Reset form
+        this.reset();
+        
+        // Reset stamp selection
+        selectedStampType = '';
+        selectedStampImage = '';
+        document.getElementById('selectedStamp').value = '';
+        
+        // Reset stamp spot
+        const stampSpot = document.getElementById('stampSpot');
+        const stampImg = document.getElementById('selectedStampImg');
+        const placeholder = stampSpot.querySelector('.stamp-placeholder');
+        
+        stampImg.style.display = 'none';
+        placeholder.style.display = 'block';
+        stampSpot.classList.remove('has-stamp');
+        
+        // Remove active class from stamps
+        document.querySelectorAll('.stamp-option').forEach(stamp => {
+          stamp.classList.remove('active');
+        });
+        
+        // Disable send button
+        document.getElementById('sendBtn').disabled = true;
+        
+        // Hide success message
+        document.getElementById('successMessage').classList.remove('show');
+      }, 3000);
+    });
+  });
+</script>
+</body>
+</html>

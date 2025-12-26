@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yomna Dhouib - Arts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-main:     #f5f9f8;     
+      --bg-cream:    #f8fbfa;
+      --accent:      #9ec9c2;     
+      --accent-light:#c2e0db;
+      --title-color: #7ab4aa;     
+      --text-dark:   #4a5c59;     
+      --footer-bg:   #e8f3f1;     
+      --footer-text: #6b7a78;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg-main);
+      color:var(--text-dark);
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    .container{max-width:1600px;margin:auto;padding:20px;position:relative;}
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:28px 0;position:relative;z-index:100;
+    }
+    .logo{
+      font-family:'Pacifico',cursive;font-size:2.1rem;color:var(--accent);
+      cursor:pointer;transition:color .3s;
+    }
+    .logo:hover{color:var(--title-color);}
+    nav a{color:var(--text-dark);text-decoration:none;font-weight:500;transition:color .3s;}
+    nav a:hover{color:var(--accent);}
+    nav a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .email-btn{
+      background:#fff;
+      border:2px solid var(--accent);padding:10px 20px;border-radius:30px;
+      font-size:.9rem;cursor:pointer;display:flex;align-items:center;gap:8px;
+      transition:.3s;font-weight:500;
+      color: var(--accent);
+    }
+    .email-btn:hover{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .arts-hero {
+      text-align:center;
+      padding:60px 20px 40px;
+    }
+    
+    .arts-title {
+      font-family:'Playfair Display',serif;
+      font-size:3.2rem;
+      color:var(--title-color);
+      margin-bottom:20px;
+    }
+    
+    .arts-subtitle {
+      font-size:1.2rem;
+      color:var(--text-dark);
+      opacity:0.8;
+      max-width:600px;
+      margin:0 auto;
+    }
+
+    .polaroid-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+      gap:40px;
+      padding:40px 20px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    
+    .polaroid-item {
+      background:white;
+      padding:15px 15px 50px;
+      border-radius:4px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.08);
+      transition:all 0.3s ease;
+      transform:rotate(var(--rot));
+      height:fit-content;
+    }
+    
+    .polaroid-item:nth-child(3n) { --rot: -1deg; }
+    .polaroid-item:nth-child(3n+1) { --rot: 1.5deg; }
+    .polaroid-item:nth-child(3n+2) { --rot: -0.5deg; }
+    
+    .polaroid-item:hover {
+      transform:rotate(0deg) scale(1.05);
+      box-shadow:0 15px 35px rgba(158, 201, 194, 0.3);
+    }
+    
+    .polaroid-item img {
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      display:block;
+      border-radius:2px;
+    }
+    
+    .polaroid-caption {
+      text-align:center;
+      margin-top:15px;
+      font-family:'Pacifico',cursive;
+      font-size:1.1rem;
+      color:var(--title-color);
+    }
+    
+    .location {
+      display:block;
+      font-family:'Poppins',sans-serif;
+      font-size:0.85rem;
+      color:var(--text-dark);
+      opacity:0.7;
+      margin-top:5px;
+    }
+
+    /* Footer */
+    .footer{
+      background:var(--footer-bg);padding:50px 40px;
+      text-align:center;color:var(--footer-text);
+      border-top:1px solid rgba(0,0,0,0.06);
+      margin-top:40px;
+    }
+    .footer .name{font-family:'Pacifico',cursive;font-size:1.5rem;color:var(--accent);}
+    .footer a:hover{color:var(--title-color);}
+    
+    .social-links {
+      display:flex;
+      gap:24px;
+      justify-content:center;
+      margin:16px 0;
+      flex-wrap:wrap;
+    }
+    
+    .social-links a {
+      font-size:1rem;
+      padding:10px 20px;
+      background:rgba(158, 201, 194, 0.1);
+      border-radius:25px;
+      transition:background 0.3s;
+      color:var(--footer-text);
+      text-decoration:none;
+    }
+    
+    .social-links a:hover {
+      background:rgba(158, 201, 194, 0.2);
+      color:var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width:900px) {
+      .polaroid-grid {
+        grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+        gap:30px;
+      }
+      .arts-title {
+        font-size:2.8rem;
+      }
+    }
+    
+    @media (max-width:600px) {
+      .polaroid-grid {
+        grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+        gap:25px;
+      }
+      .arts-title {
+        font-size:2.4rem;
+      }
+      header {
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+      }
+      nav ul {
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:20px;
+      }
+      .polaroid-item {
+        transform:rotate(0deg) !important;
+      }
+      .polaroid-item:hover {
+        transform:scale(1.03) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo" onclick="location.href='index.html'">yomna dhouib</div>
+    <nav>
+      <ul style="display:flex;gap:32px;list-style:none;">
+        <li><a href="my-story.html">my story</a></li>
+        <li><a href="united nations.html">united nations</a></li>
+        <li><a href="google.html">google</a></li>
+        <li><a href="arts.html" class="active">arts</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+    <button class="email-btn" onclick="location.href='mailto:ydhouib06@gmail.com'">
+      <span>MY EMAIL</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </button>
+  </header>
+
+  <section class="arts-hero">
+    <h1 class="arts-title">Through My Lens</h1>
+    <p class="arts-subtitle">Simple moments captured during my travels, a visual diary of places that moved me</p>
+  </section>
+
+  <div class="polaroid-grid">
+    <div class="polaroid-item">
+      <img src="pics/mountain.jpeg" alt="Jabal uhud">
+      <div class="polaroid-caption">
+        Desert Whispers
+        <span class="location">Al-Medinah, KSA</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/haram.jpeg" alt="Al-Haram">
+      <div class="polaroid-caption">
+        Enchanted Path
+        <span class="location">Al-Medinah, KSA</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/hergla.jpeg" alt="Night Wander">
+      <div class="polaroid-caption">
+        Golden Dawn
+        <span class="location">Hergla, Sousse</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/beach.jpeg" alt="Coastal cliffs">
+      <div class="polaroid-caption">
+        Ocean's Edge
+        <span class="location">Mediterranean Coast</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/yz.jpeg" alt="Sunset">
+      <div class="polaroid-caption">
+        Liquid Silver
+        <span class="location">Sousse, Tunisia</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/kairouan.jpeg" alt="Ancient doors">
+      <div class="polaroid-caption">
+        Echoes of Time
+        <span class="location">Kairouan, Tunisia</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/plane.jpeg" alt="Calm">
+      <div class="polaroid-caption">
+        Starry night
+        <span class="location">In the Sky, Somewhere</span>
+      </div>
+    </div>
+    
+    <div class="polaroid-item">
+      <img src="pics/mahdia.jpeg" alt="Where the sky meets the sea">
+      <div class="polaroid-caption">
+        Celestial Dance
+        <span class="location">Mahdia, Tunisia</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="name">Yomna Dhouib's Portfolio</div>
+    <a href="mailto:ydhouib06@gmail.com" class="email">ydhouib06@gmail.com</a>
+    <div class="connect">LET'S CONNECT!</div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/yomnadhouib/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@mamounaa_" target="_blank">TikTok</a>
+      <a href="https://github.com/yomnaa06" target="_blank">GitHub</a>
+      <a href="https://www.facebook.com/yomna.dhouib.2025" target="_blank">Facebook</a>
+    </div>
+    <div class="year">© 2025</div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.polaroid-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+      this.style.zIndex = '10';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+      this.style.zIndex = '1';
+    });
+  });
+</script>
+</body>
+</html>
