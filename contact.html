@@ -624,17 +624,21 @@
   let selectedStampType = '';
   let selectedStampImage = '';
   
+  // Stamp selection
   function selectStamp(stampElement, imageSrc) {
     // Remove active class from all stamps
     document.querySelectorAll('.stamp-option').forEach(stamp => {
       stamp.classList.remove('active');
     });
     
+    // Add active class to clicked stamp
     stampElement.classList.add('active');
     
+    // Get stamp data
     selectedStampType = stampElement.dataset.stamp;
     selectedStampImage = imageSrc;
     
+    // Update stamp spot
     const stampSpot = document.getElementById('stampSpot');
     const stampImg = document.getElementById('selectedStampImg');
     const placeholder = stampSpot.querySelector('.stamp-placeholder');
@@ -644,33 +648,41 @@
     stampImg.style.display = 'block';
     stampSpot.classList.add('has-stamp');
     
+    // Update hidden input
     document.getElementById('selectedStamp').value = selectedStampType;
     
+    // Enable send button
     document.getElementById('sendBtn').disabled = false;
   }
   
+  // Form submission
   document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
       
+      // Check if stamp is selected
       if (!selectedStampType) {
         alert('Please select a stamp first!');
         return;
       }
       
+      // Get form data
       const name = this.querySelector('input[type="text"]').value;
       const email = this.querySelector('input[type="email"]').value;
       const message = this.querySelector('textarea').value;
       
+      // Validation
       if (!name || !email || !message) {
         alert('Please fill in all fields!');
         return;
       }
       
+      // Show success message
       document.getElementById('successMessage').classList.add('show');
       
+      // Log data
       console.log('Postcard sent:', { 
         name, 
         email, 
@@ -678,27 +690,34 @@
         stamp: selectedStampType 
       });
       
+      // Reset after 3 seconds
       setTimeout(() => {
         // Reset form
         this.reset();
         
+        // Reset stamp selection
         selectedStampType = '';
         selectedStampImage = '';
         document.getElementById('selectedStamp').value = '';
         
-      
+        // Reset stamp spot
         const stampSpot = document.getElementById('stampSpot');
         const stampImg = document.getElementById('selectedStampImg');
         const placeholder = stampSpot.querySelector('.stamp-placeholder');
         
         stampImg.style.display = 'none';
         placeholder.style.display = 'block';
-        
         stampSpot.classList.remove('has-stamp');
+        
+        // Remove active class from stamps
         document.querySelectorAll('.stamp-option').forEach(stamp => {
           stamp.classList.remove('active');
         });
+        
+        // Disable send button
         document.getElementById('sendBtn').disabled = true;
+        
+        // Hide success message
         document.getElementById('successMessage').classList.remove('show');
       }, 3000);
     });
