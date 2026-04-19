@@ -587,12 +587,14 @@
 
           <input type="hidden" name="stamp" id="stampInput" value="">
           
-                      <!-- FormSubmit Configuration -->
-                      <input type="hidden" name="_subject" value="New Postcard from {{name}}">
-                      <input type="hidden" name="_next" value="https://yomnaa06.github.io/contact.html">
-                      <input type="hidden" name="_captcha" value="false">
-                      <input type="hidden" name="_replyto" value="{{email}}">
-                      <input type="hidden" name="_autoresponse" value="Hi {{name}}, Thank you! 💌 Your postcard has been received. I'll read it soon and reply to you. Best, Yomna">
+          <!-- FormSubmit Configuration -->
+          <input type="hidden" name="_subject" value="New Postcard from {{name}}">
+          <input type="hidden" name="_next" value="https://yomnaa06.github.io/contact.html">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_replyto" value="{{email}}">
+          <input type="hidden" name="_autoresponse" value="Hi {{name}}, Thank you! 💌 Your postcard has been received. I'll read it soon and reply to you. Best, Yomna">
+
+          <button type="submit" class="send-btn" id="sendBtn" disabled>
             <span class="btn-text">Send Postcard</span>
           </button>
         </form>
