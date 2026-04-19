@@ -741,54 +741,74 @@
     zone.style.transform = 'scale(1.1)';
     setTimeout(() => zone.style.transform = '', 300);
   }
-
-  // ── FORM SUBMIT ──
-  document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    if (!document.getElementById('stampInput').value) {
-      alert('Please drag a stamp to its place first!');
-      return;
-    }
-
-    const btn = document.getElementById('sendBtn');
-    btn.disabled = true;
-    btn.querySelector('.btn-text').textContent = 'Sending...';
-
-    const data = new FormData(this);
-
-    try {
-      const res  = await fetch('https://yomnadhouib.infinityfreeapp.com/travellog/send_mail.php', {
-        method: 'POST',
-        body: data
-      });
-      const json = await res.json();
-
-      if (json.success) {
-        document.getElementById('successMsg').classList.add('show');
-        document.getElementById('errorMsg').classList.remove('show');
-        this.reset();
-        resetStamp();
-      } else {
-        document.getElementById('errorMsg').classList.add('show');
+    // Form submission
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+   
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+     
+      if (!selectedStampType) {
+        alert('Please select a stamp first!');
+        return;
       }
-    } catch(err) {
-      document.getElementById('errorMsg').classList.add('show');
-    }
 
-    btn.disabled = false;
-    btn.querySelector('.btn-text').textContent = 'Send Postcard';
+      const btn = document.getElementById('sendBtn');
+      const originalText = btn.textContent;
+      btn.textContent = "Sending...";
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData(this);
+        
+        const res = await fetch('https://formsubmit.co/ajax/ydhouib06@gmail.com', {
+          method: 'POST',
+          body: formData
+        });
+
+        const json = await res.json();
+
+        if (json.success) {
+          document.getElementById('successMessage').classList.add('show');
+          
+          setTimeout(() => {
+            this.reset();
+            resetStampSelection();
+            document.getElementById('successMessage').classList.remove('show');
+          }, 4000);
+        } else {
+          alert("Something went wrong. Please try again or email me directly.");
+        }
+      } catch(err) {
+        alert("Something went wrong. Please try again or email me directly.");
+      }
+
+      btn.textContent = originalText;
+      btn.disabled = false;
+    });
   });
 
-  function resetStamp() {
-    document.getElementById('zoneImg').style.display = 'none';
-    document.getElementById('zonePlaceholder').style.display = 'block';
-    zone.classList.remove('has-stamp');
-    document.getElementById('stampInput').value = '';
+  function resetStampSelection() {
+    selectedStampType = '';
+    selectedStampImage = '';
+    document.getElementById('selectedStamp').value = '';
+    
+    const stampSpot = document.getElementById('stampSpot');
+    const stampImg = document.getElementById('selectedStampImg');
+    const placeholder = stampSpot.querySelector('.stamp-placeholder');
+    
+    stampImg.style.display = 'none';
+    placeholder.style.display = 'block';
+    stampSpot.classList.remove('has-stamp');
+    
+    document.querySelectorAll('.stamp-option').forEach(stamp => {
+      stamp.classList.remove('active');
+    });
+    
     document.getElementById('sendBtn').disabled = true;
-    document.querySelectorAll('.stamp.used').forEach(s => s.classList.remove('used'));
-    selectedStampSrc = '';
   }
+
+
 </script>
 </body>
 </html>
