@@ -618,7 +618,6 @@
   </footer>
 
 </div>
-
 <script>
   let selectedStampSrc = '';
   let draggedStamp = null;
@@ -643,7 +642,6 @@
 
   zone.addEventListener('dragover', e => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = 'copy';
     zone.classList.add('drag-over');
   });
 
@@ -654,13 +652,10 @@
   zone.addEventListener('drop', e => {
     e.preventDefault();
     zone.classList.remove('drag-over');
-
     const src = e.dataTransfer.getData('text/plain') || selectedStampSrc;
     if (!src) return;
-
     placeStamp(src);
 
-    // mark dragged stamp as used
     if (draggedStamp) {
       document.querySelectorAll('.stamp.used').forEach(s => s.classList.remove('used'));
       draggedStamp.classList.add('used');
@@ -668,24 +663,14 @@
     }
   });
 
-  // ── TOUCH DRAG (mobile) ──
+  // Touch support (mobile)
   document.querySelectorAll('.stamp').forEach(stamp => {
     let clone = null;
-    let startX, startY;
-
     stamp.addEventListener('touchstart', e => {
       const touch = e.touches[0];
-      startX = touch.clientX;
-      startY = touch.clientY;
       selectedStampSrc = stamp.dataset.src;
-
       clone = stamp.cloneNode(true);
-      clone.style.cssText = `
-        position:fixed; width:80px; pointer-events:none; opacity:0.85;
-        z-index:9999; border-radius:3px; transform:rotate(5deg);
-        box-shadow:0 10px 30px rgba(44,36,22,0.3);
-        left:${touch.clientX - 40}px; top:${touch.clientY - 50}px;
-      `;
+      clone.style.cssText = `position:fixed; width:80px; pointer-events:none; opacity:0.85; z-index:9999; border-radius:3px; transform:rotate(5deg); box-shadow:0 10px 30px rgba(44,36,22,0.3); left:${touch.clientX - 40}px; top:${touch.clientY - 50}px;`;
       document.body.appendChild(clone);
     }, { passive: true });
 
@@ -693,30 +678,18 @@
       e.preventDefault();
       const touch = e.touches[0];
       if (clone) {
-        clone.style.left = touch.clientX - 40 + 'px';
-        clone.style.top  = touch.clientY - 50 + 'px';
-      }
-      const zoneRect = zone.getBoundingClientRect();
-      if (
-        touch.clientX >= zoneRect.left && touch.clientX <= zoneRect.right &&
-        touch.clientY >= zoneRect.top  && touch.clientY <= zoneRect.bottom
-      ) {
-        zone.classList.add('drag-over');
-      } else {
-        zone.classList.remove('drag-over');
+        clone.style.left = (touch.clientX - 40) + 'px';
+        clone.style.top = (touch.clientY - 50) + 'px';
       }
     }, { passive: false });
 
     stamp.addEventListener('touchend', e => {
-      if (clone) { clone.remove(); clone = null; }
+      if (clone) clone.remove();
       zone.classList.remove('drag-over');
-
       const touch = e.changedTouches[0];
       const zoneRect = zone.getBoundingClientRect();
-      if (
-        touch.clientX >= zoneRect.left && touch.clientX <= zoneRect.right &&
-        touch.clientY >= zoneRect.top  && touch.clientY <= zoneRect.bottom
-      ) {
+      if (touch.clientX >= zoneRect.left && touch.clientX <= zoneRect.right && 
+          touch.clientY >= zoneRect.top && touch.clientY <= zoneRect.bottom) {
         placeStamp(selectedStampSrc);
         document.querySelectorAll('.stamp.used').forEach(s => s.classList.remove('used'));
         stamp.classList.add('used');
@@ -724,91 +697,79 @@
     });
   });
 
-  // ── PLACE STAMP IN ZONE ──
+  // Place stamp
   function placeStamp(src) {
     const img = document.getElementById('zoneImg');
-    const ph  = document.getElementById('zonePlaceholder');
-
+    const ph = document.getElementById('zonePlaceholder');
     img.src = src;
     img.style.display = 'block';
-    ph.style.display  = 'none';
+    ph.style.display = 'none';
     zone.classList.add('has-stamp');
-
     document.getElementById('stampInput').value = src;
     document.getElementById('sendBtn').disabled = false;
-
-    // little bounce animation
+    
     zone.style.transform = 'scale(1.1)';
     setTimeout(() => zone.style.transform = '', 300);
   }
-    // Form submission
-  document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-   
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-     
-      if (!selectedStampType) {
-        alert('Please select a stamp first!');
-        return;
-      }
 
-      const btn = document.getElementById('sendBtn');
-      const originalText = btn.textContent;
-      btn.textContent = "Sending...";
-      btn.disabled = true;
+  // Form Submission - FIXED
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-      try {
-        const formData = new FormData(this);
+    if (!document.getElementById('stampInput').value) {
+      alert('Please drag a stamp first!');
+      return;
+    }
+
+    const btn = document.getElementById('sendBtn');
+    const btnText = btn.querySelector('.btn-text');
+    const originalText = btnText.textContent;
+    btnText.textContent = "Sending...";
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(this);
+      
+      const res = await fetch('https://formsubmit.co/ajax/ydhouib06@gmail.com', {
+        method: 'POST',
+        body: formData
+      });
+
+      const json = await res.json();
+
+      if (json.success) {
+        document.getElementById('successMsg').classList.add('show');
+        document.getElementById('errorMsg').classList.remove('show');
         
-        const res = await fetch('https://formsubmit.co/ajax/ydhouib06@gmail.com', {
-          method: 'POST',
-          body: formData
-        });
-
-        const json = await res.json();
-
-        if (json.success) {
-          document.getElementById('successMessage').classList.add('show');
-          
-          setTimeout(() => {
-            this.reset();
-            resetStampSelection();
-            document.getElementById('successMessage').classList.remove('show');
-          }, 4000);
-        } else {
-          alert("Something went wrong. Please try again or email me directly.");
-        }
-      } catch(err) {
-        alert("Something went wrong. Please try again or email me directly.");
+        setTimeout(() => {
+          this.reset();
+          resetStamp();
+        }, 3500);
+      } else {
+        document.getElementById('errorMsg').classList.add('show');
       }
+    } catch (err) {
+      document.getElementById('errorMsg').classList.add('show');
+    }
 
-      btn.textContent = originalText;
-      btn.disabled = false;
-    });
+    btnText.textContent = originalText;
+    btn.disabled = false;
   });
 
-  function resetStampSelection() {
-    selectedStampType = '';
-    selectedStampImage = '';
-    document.getElementById('selectedStamp').value = '';
-    
-    const stampSpot = document.getElementById('stampSpot');
-    const stampImg = document.getElementById('selectedStampImg');
-    const placeholder = stampSpot.querySelector('.stamp-placeholder');
-    
-    stampImg.style.display = 'none';
-    placeholder.style.display = 'block';
-    stampSpot.classList.remove('has-stamp');
-    
-    document.querySelectorAll('.stamp-option').forEach(stamp => {
-      stamp.classList.remove('active');
-    });
-    
+  // Reset function
+  function resetStamp() {
+    document.getElementById('zoneImg').style.display = 'none';
+    document.getElementById('zonePlaceholder').style.display = 'block';
+    document.getElementById('stampZone').classList.remove('has-stamp');
+    document.getElementById('stampInput').value = '';
     document.getElementById('sendBtn').disabled = true;
+    document.getElementById('successMsg').classList.remove('show');
+    document.getElementById('errorMsg').classList.remove('show');
+    
+    document.querySelectorAll('.stamp.used').forEach(s => s.classList.remove('used'));
   }
-
-
 </script>
+
+
 </body>
 </html>
