@@ -588,11 +588,10 @@
           <input type="hidden" name="stamp" id="stampInput" value="">
           
           <!-- FormSubmit Configuration -->
-          <input type="hidden" name="_subject" value="New Postcard from {{name}}">
-          <input type="hidden" name="_next" value="https://yomnaa06.github.io/contact.html">
+          <input type="hidden" name="_subject" id="emailSubject" value="New Postcard">
+          <input type="hidden" name="_replyto" id="emailReplyTo" value="">
+          <input type="hidden" name="_autoresponse" id="emailAutoResponse" value="">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_replyto" value="{{email}}">
-          <input type="hidden" name="_autoresponse" value="Hi {{name}}, Thank you! 💌 Your postcard has been received. I'll read it soon and reply to you. Best, Yomna">
 
           <button type="submit" class="send-btn" id="sendBtn" disabled>
             <span class="btn-text">Send Postcard</span>
@@ -736,6 +735,11 @@
 
     try {
       const formData = new FormData(this);
+      const senderName = this.querySelector('input[name="name"]').value;
+      const senderEmail = this.querySelector('input[name="email"]').value;
+      document.getElementById('emailSubject').value = 'New Postcard from ' + senderName;
+      document.getElementById('emailReplyTo').value = senderEmail;
+      document.getElementById('emailAutoResponse').value = 'Hi ' + senderName + ', Thank you! 💌 Your postcard has been received. I\'ll read it soon and reply to you. Best, Yomna';
       
       const res = await fetch('https://formsubmit.co/ajax/ydhouib06@gmail.com', {
         method: 'POST',
