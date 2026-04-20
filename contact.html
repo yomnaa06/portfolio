@@ -734,13 +734,12 @@
     btn.disabled = true;
 
     try {
-      const formData = new FormData(this);
       const senderName = this.querySelector('input[name="name"]').value;
       const senderEmail = this.querySelector('input[name="email"]').value;
       document.getElementById('emailSubject').value = 'New Postcard from ' + senderName;
       document.getElementById('emailReplyTo').value = senderEmail;
       document.getElementById('emailAutoResponse').value = 'Hi ' + senderName + ', Thank you! 💌 Your postcard has been received. I\'ll read it soon and reply to you. Best, Yomna';
-      
+      const formData = new FormData(this);
       const res = await fetch('https://formsubmit.co/ajax/ydhouib06@gmail.com', {
         method: 'POST',
         body: formData
